@@ -216,7 +216,14 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "26-수능-영어_p004_x92.png",
+                "26-수능-영어_p004_x94.png",
+                "26-수능-영어_p004_x95.png",
+                "26-수능-영어_p004_x97.png",
+                "26-수능-영어_p004_x99.png"
+              ]
             }
           ],
           "page_start": 3,
@@ -270,7 +277,14 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "26-수능-영어_p004_x92.png",
+                "26-수능-영어_p004_x94.png",
+                "26-수능-영어_p004_x95.png",
+                "26-수능-영어_p004_x97.png",
+                "26-수능-영어_p004_x99.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -297,7 +311,14 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "26-수능-영어_p004_x92.png",
+                "26-수능-영어_p004_x94.png",
+                "26-수능-영어_p004_x95.png",
+                "26-수능-영어_p004_x97.png",
+                "26-수능-영어_p004_x99.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -1009,7 +1030,14 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "26-9월-영어_p004_x53.png",
+                "26-9월-영어_p004_x55.png",
+                "26-9월-영어_p004_x56.png",
+                "26-9월-영어_p004_x58.png",
+                "26-9월-영어_p004_x60.png"
+              ]
             }
           ],
           "page_start": 3,
@@ -1063,7 +1091,14 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "26-9월-영어_p004_x53.png",
+                "26-9월-영어_p004_x55.png",
+                "26-9월-영어_p004_x56.png",
+                "26-9월-영어_p004_x58.png",
+                "26-9월-영어_p004_x60.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -1090,7 +1125,14 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "26-9월-영어_p004_x53.png",
+                "26-9월-영어_p004_x55.png",
+                "26-9월-영어_p004_x56.png",
+                "26-9월-영어_p004_x58.png",
+                "26-9월-영어_p004_x60.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -1725,7 +1767,11 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "26-6월-영어_p004_x85.png",
+                "26-6월-영어_p004_x92.png"
+              ]
             }
           ],
           "page_start": 3,
@@ -1779,7 +1825,11 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "26-6월-영어_p004_x85.png",
+                "26-6월-영어_p004_x92.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -1806,7 +1856,11 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 2,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "26-6월-영어_p004_x85.png",
+                "26-6월-영어_p004_x92.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -2441,7 +2495,14 @@ const EXAM_DATA_ENG = {
               ],
               "answer": null,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "25-수능-영어_p004_x10.png",
+                "25-수능-영어_p004_x12.png",
+                "25-수능-영어_p004_x14.png",
+                "25-수능-영어_p004_x15.png",
+                "25-수능-영어_p004_x17.png"
+              ]
             }
           ],
           "page_start": 3,
@@ -2495,7 +2556,14 @@ const EXAM_DATA_ENG = {
               ],
               "answer": null,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "25-수능-영어_p004_x10.png",
+                "25-수능-영어_p004_x12.png",
+                "25-수능-영어_p004_x14.png",
+                "25-수능-영어_p004_x15.png",
+                "25-수능-영어_p004_x17.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -2522,7 +2590,14 @@ const EXAM_DATA_ENG = {
               ],
               "answer": null,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "25-수능-영어_p004_x10.png",
+                "25-수능-영어_p004_x12.png",
+                "25-수능-영어_p004_x14.png",
+                "25-수능-영어_p004_x15.png",
+                "25-수능-영어_p004_x17.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -3154,7 +3229,13 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "25-9월-영어_p004_x20.png",
+                "25-9월-영어_p004_x15.png",
+                "25-9월-영어_p004_x17.png",
+                "25-9월-영어_p004_x18.png"
+              ]
             }
           ],
           "page_start": 3,
@@ -3208,7 +3289,13 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "25-9월-영어_p004_x20.png",
+                "25-9월-영어_p004_x15.png",
+                "25-9월-영어_p004_x17.png",
+                "25-9월-영어_p004_x18.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -3235,7 +3322,13 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "25-9월-영어_p004_x20.png",
+                "25-9월-영어_p004_x15.png",
+                "25-9월-영어_p004_x17.png",
+                "25-9월-영어_p004_x18.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -3870,7 +3963,13 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "25-6월-영어_p004_x22.png",
+                "25-6월-영어_p004_x16.png",
+                "25-6월-영어_p004_x18.png",
+                "25-6월-영어_p004_x20.png"
+              ]
             }
           ],
           "page_start": 3,
@@ -3924,7 +4023,13 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "25-6월-영어_p004_x22.png",
+                "25-6월-영어_p004_x16.png",
+                "25-6월-영어_p004_x18.png",
+                "25-6월-영어_p004_x20.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -3951,7 +4056,13 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "25-6월-영어_p004_x22.png",
+                "25-6월-영어_p004_x16.png",
+                "25-6월-영어_p004_x18.png",
+                "25-6월-영어_p004_x20.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -4586,7 +4697,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "24-수능-영어_p004_x48.png",
+                "24-수능-영어_p004_x50.png",
+                "24-수능-영어_p004_x42.png"
+              ]
             }
           ],
           "page_start": 3,
@@ -4640,7 +4756,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "24-수능-영어_p004_x48.png",
+                "24-수능-영어_p004_x50.png",
+                "24-수능-영어_p004_x42.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -4667,7 +4788,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "24-수능-영어_p004_x48.png",
+                "24-수능-영어_p004_x50.png",
+                "24-수능-영어_p004_x42.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -5379,7 +5505,13 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "24-9월-영어_p004_x19.png",
+                "24-9월-영어_p004_x20.png",
+                "24-9월-영어_p004_x16.png",
+                "24-9월-영어_p004_x18.png"
+              ]
             }
           ],
           "page_start": 3,
@@ -5433,7 +5565,13 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 2,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "24-9월-영어_p004_x19.png",
+                "24-9월-영어_p004_x20.png",
+                "24-9월-영어_p004_x16.png",
+                "24-9월-영어_p004_x18.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -5460,7 +5598,13 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "24-9월-영어_p004_x19.png",
+                "24-9월-영어_p004_x20.png",
+                "24-9월-영어_p004_x16.png",
+                "24-9월-영어_p004_x18.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -6104,7 +6248,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "24-6월-영어_p004_x43.png",
+                "24-6월-영어_p004_x46.png",
+                "24-6월-영어_p004_x40.png"
+              ]
             }
           ],
           "page_start": 3,
@@ -6158,7 +6307,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "24-6월-영어_p004_x43.png",
+                "24-6월-영어_p004_x46.png",
+                "24-6월-영어_p004_x40.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -6185,7 +6339,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "24-6월-영어_p004_x43.png",
+                "24-6월-영어_p004_x46.png",
+                "24-6월-영어_p004_x40.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -6829,7 +6988,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "23-수능-영어_p004_x52.png",
+                "23-수능-영어_p004_x48.png",
+                "23-수능-영어_p004_x43.png"
+              ]
             }
           ],
           "page_start": 3,
@@ -6910,7 +7074,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "23-수능-영어_p004_x52.png",
+                "23-수능-영어_p004_x48.png",
+                "23-수능-영어_p004_x43.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -7634,7 +7803,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "23-9월-영어_p004_x43.png",
+                "23-9월-영어_p004_x46.png",
+                "23-9월-영어_p004_x40.png"
+              ]
             }
           ],
           "page_start": 3,
@@ -7688,7 +7862,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "23-9월-영어_p004_x43.png",
+                "23-9월-영어_p004_x46.png",
+                "23-9월-영어_p004_x40.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -7715,7 +7894,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "23-9월-영어_p004_x43.png",
+                "23-9월-영어_p004_x46.png",
+                "23-9월-영어_p004_x40.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -8359,7 +8543,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "23-6월-영어_p004_x14.png",
+                "23-6월-영어_p004_x15.png",
+                "23-6월-영어_p004_x16.png"
+              ]
             }
           ],
           "page_start": 3,
@@ -8413,7 +8602,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "23-6월-영어_p004_x14.png",
+                "23-6월-영어_p004_x15.png",
+                "23-6월-영어_p004_x16.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -8440,7 +8634,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "23-6월-영어_p004_x14.png",
+                "23-6월-영어_p004_x15.png",
+                "23-6월-영어_p004_x16.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -9084,7 +9283,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "22-수능-영어_p004_x21.png",
+                "22-수능-영어_p004_x14.png",
+                "22-수능-영어_p004_x19.png"
+              ]
             }
           ],
           "page_start": 3,
@@ -9138,7 +9342,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "22-수능-영어_p004_x21.png",
+                "22-수능-영어_p004_x14.png",
+                "22-수능-영어_p004_x19.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -9165,7 +9374,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "22-수능-영어_p004_x21.png",
+                "22-수능-영어_p004_x14.png",
+                "22-수능-영어_p004_x19.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -9809,7 +10023,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "22-9월-영어_p004_x18.png",
+                "22-9월-영어_p004_x15.png",
+                "22-9월-영어_p004_x17.png"
+              ]
             }
           ],
           "page_start": 3,
@@ -9863,7 +10082,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 2,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "22-9월-영어_p004_x18.png",
+                "22-9월-영어_p004_x15.png",
+                "22-9월-영어_p004_x17.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -9890,7 +10114,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "22-9월-영어_p004_x18.png",
+                "22-9월-영어_p004_x15.png",
+                "22-9월-영어_p004_x17.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -10534,7 +10763,13 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 2,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "22-6월-영어_p004_x23.png",
+                "22-6월-영어_p004_x25.png",
+                "22-6월-영어_p004_x19.png",
+                "22-6월-영어_p004_x22.png"
+              ]
             }
           ],
           "page_start": 3,
@@ -10588,7 +10823,13 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "22-6월-영어_p004_x23.png",
+                "22-6월-영어_p004_x25.png",
+                "22-6월-영어_p004_x19.png",
+                "22-6월-영어_p004_x22.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -10615,7 +10856,13 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "22-6월-영어_p004_x23.png",
+                "22-6월-영어_p004_x25.png",
+                "22-6월-영어_p004_x19.png",
+                "22-6월-영어_p004_x22.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -11259,7 +11506,13 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "21-수능-영어_p004_x21.png",
+                "21-수능-영어_p004_x16.png",
+                "21-수능-영어_p004_x18.png",
+                "21-수능-영어_p004_x20.png"
+              ]
             }
           ],
           "page_start": 3,
@@ -11313,7 +11566,13 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "21-수능-영어_p004_x21.png",
+                "21-수능-영어_p004_x16.png",
+                "21-수능-영어_p004_x18.png",
+                "21-수능-영어_p004_x20.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -11340,7 +11599,13 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "21-수능-영어_p004_x21.png",
+                "21-수능-영어_p004_x16.png",
+                "21-수능-영어_p004_x18.png",
+                "21-수능-영어_p004_x20.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -11984,7 +12249,11 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 2,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "21-9월-영어_p004_x12.png",
+                "21-9월-영어_p004_x14.png"
+              ]
             }
           ],
           "page_start": 3,
@@ -12038,7 +12307,11 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "21-9월-영어_p004_x12.png",
+                "21-9월-영어_p004_x14.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -12065,7 +12338,11 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "21-9월-영어_p004_x12.png",
+                "21-9월-영어_p004_x14.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -12709,7 +12986,10 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "21-6월-영어_p004_x11.png"
+              ]
             }
           ],
           "page_start": 3,
@@ -12763,7 +13043,10 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "21-6월-영어_p004_x11.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -12790,7 +13073,10 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "21-6월-영어_p004_x11.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -13434,7 +13720,13 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "20-수능-영어_p004_x21.png",
+                "20-수능-영어_p004_x22.png",
+                "20-수능-영어_p004_x24.png",
+                "20-수능-영어_p004_x25.png"
+              ]
             }
           ],
           "page_start": 3,
@@ -13488,7 +13780,13 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "20-수능-영어_p004_x21.png",
+                "20-수능-영어_p004_x22.png",
+                "20-수능-영어_p004_x24.png",
+                "20-수능-영어_p004_x25.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -13515,7 +13813,13 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "20-수능-영어_p004_x21.png",
+                "20-수능-영어_p004_x22.png",
+                "20-수능-영어_p004_x24.png",
+                "20-수능-영어_p004_x25.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -14159,7 +14463,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "20-9월-영어_p004_x19.png",
+                "20-9월-영어_p004_x16.png",
+                "20-9월-영어_p004_x18.png"
+              ]
             }
           ],
           "page_start": 3,
@@ -14213,7 +14522,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "20-9월-영어_p004_x19.png",
+                "20-9월-영어_p004_x16.png",
+                "20-9월-영어_p004_x18.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -14240,7 +14554,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "20-9월-영어_p004_x19.png",
+                "20-9월-영어_p004_x16.png",
+                "20-9월-영어_p004_x18.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -14884,7 +15203,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "20-6월-영어_p004_x15.png",
+                "20-6월-영어_p004_x17.png",
+                "20-6월-영어_p004_x19.png"
+              ]
             }
           ],
           "page_start": 3,
@@ -14938,7 +15262,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "20-6월-영어_p004_x15.png",
+                "20-6월-영어_p004_x17.png",
+                "20-6월-영어_p004_x19.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -14965,7 +15294,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "20-6월-영어_p004_x15.png",
+                "20-6월-영어_p004_x17.png",
+                "20-6월-영어_p004_x19.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -15609,7 +15943,15 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "19-수능-영어_p004_x17.png",
+                "19-수능-영어_p004_x18.png",
+                "19-수능-영어_p004_x20.png",
+                "19-수능-영어_p004_x21.png",
+                "19-수능-영어_p004_x22.png",
+                "19-수능-영어_p004_x23.png"
+              ]
             }
           ],
           "page_start": 3,
@@ -15663,7 +16005,15 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "19-수능-영어_p004_x17.png",
+                "19-수능-영어_p004_x18.png",
+                "19-수능-영어_p004_x20.png",
+                "19-수능-영어_p004_x21.png",
+                "19-수능-영어_p004_x22.png",
+                "19-수능-영어_p004_x23.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -15690,7 +16040,15 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "19-수능-영어_p004_x17.png",
+                "19-수능-영어_p004_x18.png",
+                "19-수능-영어_p004_x20.png",
+                "19-수능-영어_p004_x21.png",
+                "19-수능-영어_p004_x22.png",
+                "19-수능-영어_p004_x23.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -16334,7 +16692,13 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "19-9월-영어_p004_x18.png",
+                "19-9월-영어_p004_x20.png",
+                "19-9월-영어_p004_x22.png",
+                "19-9월-영어_p004_x17.png"
+              ]
             }
           ],
           "page_start": 3,
@@ -16388,7 +16752,13 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "19-9월-영어_p004_x18.png",
+                "19-9월-영어_p004_x20.png",
+                "19-9월-영어_p004_x22.png",
+                "19-9월-영어_p004_x17.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -16415,7 +16785,13 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "19-9월-영어_p004_x18.png",
+                "19-9월-영어_p004_x20.png",
+                "19-9월-영어_p004_x22.png",
+                "19-9월-영어_p004_x17.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -17032,7 +17408,10 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "19-6월-영어_p003_x12.png"
+              ]
             }
           ],
           "page_start": 3,
@@ -17086,7 +17465,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 2,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "19-6월-영어_p004_x33.png",
+                "19-6월-영어_p004_x34.png",
+                "19-6월-영어_p004_x27.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -17113,7 +17497,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "19-6월-영어_p004_x33.png",
+                "19-6월-영어_p004_x34.png",
+                "19-6월-영어_p004_x27.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -17757,7 +18146,10 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "18-수능-영어_p003_x13.png"
+              ]
             }
           ],
           "page_start": 3,
@@ -17811,7 +18203,11 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "18-수능-영어_p004_x20.png",
+                "18-수능-영어_p004_x22.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -17838,7 +18234,11 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "18-수능-영어_p004_x20.png",
+                "18-수능-영어_p004_x22.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -18482,7 +18882,10 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "18-9월-영어_p003_x10.jpeg"
+              ]
             }
           ],
           "page_start": 3,
@@ -18536,7 +18939,10 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "18-9월-영어_p004_x26.jpeg"
+              ]
             }
           ],
           "page_start": 4,
@@ -18563,7 +18969,10 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 2,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "18-9월-영어_p004_x26.jpeg"
+              ]
             }
           ],
           "page_start": 4,
@@ -19207,7 +19616,10 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "18-6월-영어_p003_x6.png"
+              ]
             }
           ],
           "page_start": 3,
@@ -19932,7 +20344,10 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "17-수능-영어_p003_x12.png"
+              ]
             }
           ],
           "page_start": 3,
@@ -19986,7 +20401,11 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "17-수능-영어_p004_x23.jpeg",
+                "17-수능-영어_p004_x25.jpeg"
+              ]
             }
           ],
           "page_start": 4,
@@ -20013,7 +20432,11 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 2,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "17-수능-영어_p004_x23.jpeg",
+                "17-수능-영어_p004_x25.jpeg"
+              ]
             }
           ],
           "page_start": 4,
@@ -20657,7 +21080,10 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "17-9월-영어_p003_x28.png"
+              ]
             }
           ],
           "page_start": 3,
@@ -20711,7 +21137,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "17-9월-영어_p004_x36.png",
+                "17-9월-영어_p004_x38.png",
+                "17-9월-영어_p004_x40.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -20738,7 +21169,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "17-9월-영어_p004_x36.png",
+                "17-9월-영어_p004_x38.png",
+                "17-9월-영어_p004_x40.png"
+              ]
             }
           ],
           "page_start": 4,
@@ -21382,7 +21818,10 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "17-6월-영어_p003_x9.jpeg"
+              ]
             }
           ],
           "page_start": 3,
@@ -21436,7 +21875,11 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "17-6월-영어_p004_x22.png",
+                "17-6월-영어_p004_x21.jpeg"
+              ]
             }
           ],
           "page_start": 4,
@@ -21463,7 +21906,11 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "17-6월-영어_p004_x22.png",
+                "17-6월-영어_p004_x21.jpeg"
+              ]
             }
           ],
           "page_start": 4,
@@ -22107,7 +22554,10 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "16-수능-영어_p003_x10.jpeg"
+              ]
             }
           ],
           "page_start": 3,
@@ -22161,7 +22611,11 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "16-수능-영어_p004_x14.jpeg",
+                "16-수능-영어_p004_x15.jpeg"
+              ]
             }
           ],
           "page_start": 4,
@@ -22188,7 +22642,11 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "16-수능-영어_p004_x14.jpeg",
+                "16-수능-영어_p004_x15.jpeg"
+              ]
             }
           ],
           "page_start": 4,
@@ -22832,7 +23290,10 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "16-9월-영어_p003_x9.jpeg"
+              ]
             }
           ],
           "page_start": 3,
@@ -22886,7 +23347,11 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "16-9월-영어_p004_x19.jpeg",
+                "16-9월-영어_p004_x20.jpeg"
+              ]
             }
           ],
           "page_start": 4,
@@ -22913,7 +23378,11 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "16-9월-영어_p004_x19.jpeg",
+                "16-9월-영어_p004_x20.jpeg"
+              ]
             }
           ],
           "page_start": 4,
@@ -23557,7 +24026,10 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "16-6월-영어_p003_x11.jpeg"
+              ]
             }
           ],
           "page_start": 3,
@@ -23611,7 +24083,11 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "16-6월-영어_p004_x15.jpeg",
+                "16-6월-영어_p004_x16.jpeg"
+              ]
             }
           ],
           "page_start": 4,
@@ -23638,7 +24114,11 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "16-6월-영어_p004_x15.jpeg",
+                "16-6월-영어_p004_x16.jpeg"
+              ]
             }
           ],
           "page_start": 4,
@@ -24309,7 +24789,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "15-수능-영어_p004_x17.jpeg",
+                "15-수능-영어_p004_x18.jpeg",
+                "15-수능-영어_p004_x19.jpeg"
+              ]
             }
           ],
           "page_start": 3,
@@ -24336,7 +24821,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "15-수능-영어_p004_x17.jpeg",
+                "15-수능-영어_p004_x18.jpeg",
+                "15-수능-영어_p004_x19.jpeg"
+              ]
             }
           ],
           "page_start": 4,
@@ -24363,7 +24853,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "15-수능-영어_p004_x17.jpeg",
+                "15-수능-영어_p004_x18.jpeg",
+                "15-수능-영어_p004_x19.jpeg"
+              ]
             }
           ],
           "page_start": 4,
@@ -25007,7 +25502,10 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "15-9월-영어_p003_x13.jpeg"
+              ]
             }
           ],
           "page_start": 3,
@@ -25034,7 +25532,10 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "15-9월-영어_p003_x13.jpeg"
+              ]
             }
           ],
           "page_start": 3,
@@ -25061,7 +25562,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "15-9월-영어_p003_x13.jpeg",
+                "15-9월-영어_p004_x17.jpeg",
+                "15-9월-영어_p004_x18.jpeg"
+              ]
             }
           ],
           "page_start": 3,
@@ -25705,7 +26211,11 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "15-6월-영어_p003_x16.jpeg",
+                "15-6월-영어_p003_x17.jpeg"
+              ]
             }
           ],
           "page_start": 3,
@@ -25732,7 +26242,14 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "15-6월-영어_p003_x16.jpeg",
+                "15-6월-영어_p003_x17.jpeg",
+                "15-6월-영어_p004_x26.jpeg",
+                "15-6월-영어_p004_x27.jpeg",
+                "15-6월-영어_p004_x25.jpeg"
+              ]
             }
           ],
           "page_start": 3,
@@ -25759,7 +26276,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "15-6월-영어_p004_x26.jpeg",
+                "15-6월-영어_p004_x27.jpeg",
+                "15-6월-영어_p004_x25.jpeg"
+              ]
             }
           ],
           "page_start": 4,
@@ -26579,7 +27101,11 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "14-수능-영어_p004_x20.png",
+                "14-수능-영어_p004_x21.jpeg"
+              ]
             }
           ],
           "page_start": 4,
@@ -26606,7 +27132,11 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "14-수능-영어_p004_x20.png",
+                "14-수능-영어_p004_x21.jpeg"
+              ]
             }
           ],
           "page_start": 4,
@@ -26633,7 +27163,13 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "14-수능-영어_p004_x20.png",
+                "14-수능-영어_p004_x21.jpeg",
+                "14-수능-영어_p005_x30.jpeg",
+                "14-수능-영어_p005_x29.jpeg"
+              ]
             }
           ],
           "page_start": 4,
@@ -26660,7 +27196,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "14-수능-영어_p005_x30.jpeg",
+                "14-수능-영어_p005_x29.jpeg",
+                "14-수능-영어_p006_x34.png"
+              ]
             }
           ],
           "page_start": 5,
@@ -27291,7 +27832,11 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "14-9월-영어_p004_x12.jpeg",
+                "14-9월-영어_p004_x13.jpeg"
+              ]
             }
           ],
           "page_start": 4,
@@ -27318,7 +27863,11 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "14-9월-영어_p004_x12.jpeg",
+                "14-9월-영어_p004_x13.jpeg"
+              ]
             }
           ],
           "page_start": 4,
@@ -27345,7 +27894,15 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 3,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "14-9월-영어_p004_x12.jpeg",
+                "14-9월-영어_p004_x13.jpeg",
+                "14-9월-영어_p005_x20.jpeg",
+                "14-9월-영어_p005_x21.jpeg",
+                "14-9월-영어_p005_x22.jpeg",
+                "14-9월-영어_p005_x23.jpeg"
+              ]
             }
           ],
           "page_start": 4,
@@ -27372,7 +27929,14 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "14-9월-영어_p005_x20.jpeg",
+                "14-9월-영어_p005_x21.jpeg",
+                "14-9월-영어_p005_x22.jpeg",
+                "14-9월-영어_p005_x23.jpeg",
+                "14-9월-영어_p006_x27.jpeg"
+              ]
             }
           ],
           "page_start": 5,
@@ -28003,7 +28567,11 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "14-6월-영어_p004_x16.png",
+                "14-6월-영어_p004_x17.jpeg"
+              ]
             }
           ],
           "page_start": 4,
@@ -28030,7 +28598,14 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "14-6월-영어_p004_x16.png",
+                "14-6월-영어_p004_x17.jpeg",
+                "14-6월-영어_p005_x22.png",
+                "14-6월-영어_p005_x23.png",
+                "14-6월-영어_p005_x21.jpeg"
+              ]
             }
           ],
           "page_start": 4,
@@ -28057,7 +28632,12 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 4,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "14-6월-영어_p005_x22.png",
+                "14-6월-영어_p005_x23.png",
+                "14-6월-영어_p005_x21.jpeg"
+              ]
             }
           ],
           "page_start": 5,
@@ -28084,7 +28664,13 @@ const EXAM_DATA_ENG = {
               ],
               "answer": 5,
               "score": 2,
-              "bogi": null
+              "bogi": null,
+              "figures": [
+                "14-6월-영어_p005_x22.png",
+                "14-6월-영어_p005_x23.png",
+                "14-6월-영어_p005_x21.jpeg",
+                "14-6월-영어_p006_x29.png"
+              ]
             }
           ],
           "page_start": 5,

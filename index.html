@@ -1179,6 +1179,17 @@ function showQuestions() {
     qDiv.appendChild(numDiv);
     qDiv.appendChild(textDiv);
 
+    // 이미지가 있지만 bogi가 없는 경우 (도표/안내문 등) → 문제 텍스트 바로 아래 표시
+    if (q.figures && q.figures.length > 0 && !q.bogi) {
+      q.figures.forEach(fig => {
+        const img = document.createElement('img');
+        img.className = 'passage-figure';
+        img.src = figDir + fig;
+        img.alt = '문제 그림';
+        qDiv.appendChild(img);
+      });
+    }
+
     if (q.bogi) {
       const bogiBox = document.createElement('div');
       bogiBox.className = 'bogi-box';
