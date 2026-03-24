@@ -1489,15 +1489,79 @@ function getWordAtPoint(node, offset) {
   return text.substring(start, end);
 }
 
-function showDictionary(word) {
-  _currentDictWord = word.toLowerCase();
-  document.getElementById('dict-word').textContent = _currentDictWord;
+// ═══ Dictionary (Wiktionary API-based lemma + inflection) ═══
+const POS_KR = {Noun:'명사',Verb:'동사',Adjective:'형용사',Adverb:'부사',
+  Preposition:'전치사',Conjunction:'접속사',Pronoun:'대명사',Interjection:'감탄사',
+  Determiner:'한정사',
+  noun:'명사',verb:'동사',adjective:'형용사',adverb:'부사',
+  preposition:'전치사',conjunction:'접속사',pronoun:'대명사',interjection:'감탄사',
+  exclamation:'감탄사',determiner:'한정사'};
 
-  // 이미 단어장에 있는지 확인
+// Wiktionary에서 원형(lemma) 추출
+function fetchLemma(word) {
+  return fetch('https://en.wiktionary.org/api/rest_v1/page/definition/' + encodeURIComponent(word))
+    .then(r => { if (!r.ok) throw new Error('not found'); return r.json(); })
+    .then(data => {
+      const en = data.en || [];
+      for (const entry of en) {
+        for (const d of (entry.definitions || [])) {
+          const raw = d.definition || '';
+          // "form-of-definition-link" 패턴에서 원형 추출
+          const m = raw.match(/form-of-definition-link.*?href="\/wiki\/([^#"]+)/);
+          if (m) return decodeURIComponent(m[1].replace(/_/g, ' '));
+        }
+      }
+      return null; // 이미 원형이거나 원형 정보 없음
+    })
+    .catch(() => null);
+}
+
+// Wiktionary HTML에서 headword 활용형 정보 추출
+function fetchInflections(baseWord) {
+  return fetch('https://en.wiktionary.org/api/rest_v1/page/html/' + encodeURIComponent(baseWord))
+    .then(r => { if (!r.ok) throw new Error(); return r.text(); })
+    .then(html => {
+      const results = [];
+      // <strong class="Latn headword"> ... </p> 패턴에서 활용형 추출
+      const re = /<strong class="Latn headword"[^>]*>.*?<\/p>/gs;
+      let match;
+      while ((match = re.exec(html)) !== null) {
+        let text = match[0].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+        if (text.length > 10 && text.includes('(')) results.push(text);
+      }
+      return results;
+    })
+    .catch(() => []);
+}
+
+function buildInflectionHtml(inflections) {
+  if (!inflections || inflections.length === 0) return '';
+  const lines = inflections.map(line => {
+    // 품사 키워드로 라벨 추가
+    let label = '';
+    if (/third-person|past |present participle/i.test(line)) label = '동사';
+    else if (/plural/i.test(line)) label = '명사';
+    else if (/comparative|superlative/i.test(line)) label = '형용사';
+    const tag = label ? '<span style="color:var(--accent);font-weight:600;">' + label + '</span> ' : '';
+    return tag + escapeHtml(line);
+  });
+  return '<div style="font-size:0.82em;color:var(--text);padding:6px 10px;margin-bottom:8px;' +
+    'background:var(--bg);border-radius:6px;border:1px solid var(--border);line-height:1.7;">' +
+    lines.join('<br>') + '</div>';
+}
+
+// ═══ Dictionary UI ═══
+function showDictionary(word) {
+  const original = word.toLowerCase();
+  _currentDictWord = original;
+
+  document.getElementById('dict-word').innerHTML = escapeHtml(original);
+
+  // 단어장 확인
   const vocab = getVocabulary();
-  const existing = vocab.words.find(w => w.word.toLowerCase() === _currentDictWord);
   const saveBtn = document.getElementById('dict-save-btn');
   const meaningInput = document.getElementById('dict-meaning-input');
+  const existing = vocab.words.find(w => w.word.toLowerCase() === original);
   if (existing) {
     saveBtn.textContent = '추가됨';
     saveBtn.className = 'dict-save-btn saved';
@@ -1508,110 +1572,122 @@ function showDictionary(word) {
     meaningInput.value = '';
   }
 
-  // 사전 결과 영역 초기화
   const resultEl = document.getElementById('dict-result');
   resultEl.innerHTML = '<div style="color:var(--secondary);padding:12px 0;text-align:center;">검색 중...</div>';
 
   const panel = document.getElementById('dict-panel');
   panel.style.display = 'block';
-  if (_dictPanelHeight) {
-    panel.style.height = _dictPanelHeight + 'px';
-  } else {
-    panel.style.height = '';
-  }
-  // 지문 스크롤 패딩 조정
+  if (_dictPanelHeight) { panel.style.height = _dictPanelHeight + 'px'; }
+  else { panel.style.height = ''; }
   setTimeout(adjustReadingPadding, 50);
 
-  // 영한사전 API로 뜻 조회
-  fetchDictionary(_currentDictWord);
+  // Step 1: Wiktionary에서 원형 조회
+  fetchLemma(original).then(lemma => {
+    const baseWord = lemma || original;
+    _currentDictWord = baseWord; // 단어장에 원형으로 저장
+
+    // 헤더에 원형 표시
+    if (baseWord !== original) {
+      document.getElementById('dict-word').innerHTML = escapeHtml(baseWord) +
+        ' <span style="font-size:0.75em;color:var(--secondary);font-weight:400;">← ' + escapeHtml(original) + '</span>';
+      // 단어장 상태도 원형으로 재확인
+      const existBase = vocab.words.find(w => w.word.toLowerCase() === baseWord);
+      if (existBase) {
+        saveBtn.textContent = '추가됨';
+        saveBtn.className = 'dict-save-btn saved';
+        if (!meaningInput.value) meaningInput.value = existBase.meaning || '';
+      }
+    }
+
+    // Step 2: 원형으로 활용형 + 정의 동시 조회
+    Promise.all([
+      fetchInflections(baseWord),
+      _fetchDefinitions(baseWord, original)
+    ]).then(([inflections, defResult]) => {
+      let html = '';
+
+      // 발음
+      if (defResult.phonetic) {
+        html += '<div style="color:var(--secondary);margin-bottom:6px;font-size:0.95em;">' + escapeHtml(defResult.phonetic) + '</div>';
+      }
+
+      // 활용형 정보
+      html += buildInflectionHtml(inflections);
+
+      // 정의 + 번역
+      html += defResult.defsHtml;
+
+      resultEl.innerHTML = html || '<div style="color:var(--secondary);">뜻을 찾을 수 없습니다.<br>아래 Daum 사전 버튼을 이용하거나 직접 입력하세요.</div>';
+
+      // 단어장 입력란 자동 채우기
+      if (meaningInput && !meaningInput.value && defResult.firstKr) {
+        meaningInput.value = defResult.firstKr;
+      }
+    });
+  });
 }
 
-const POS_KR = {noun:'명사',verb:'동사',adjective:'형용사',adverb:'부사',
-  preposition:'전치사',conjunction:'접속사',pronoun:'대명사',interjection:'감탄사',
-  exclamation:'감탄사',determiner:'한정사'};
+// 정의 + 한국어 번역 조회
+function _fetchDefinitions(baseWord, originalWord) {
+  const tryWord = (w) => fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + encodeURIComponent(w))
+    .then(r => { if (!r.ok) throw new Error(); return r.json(); });
 
-function fetchDictionary(word) {
-  const resultEl = document.getElementById('dict-result');
-  const meaningInput = document.getElementById('dict-meaning-input');
-
-  // 영영사전에서 구조화된 정의 가져오기
-  fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + encodeURIComponent(word))
-    .then(r => { if (!r.ok) throw new Error('not found'); return r.json(); })
+  return tryWord(baseWord)
+    .catch(() => originalWord !== baseWord ? tryWord(originalWord) : Promise.reject())
     .then(engData => {
       const entry = engData[0];
-      // 발음 추출
       const phonetic = entry.phonetic ||
         (entry.phonetics && entry.phonetics.find(p => p.text) || {}).text || '';
 
-      // 정의 수집 (최대 6개, 총 450자 이내)
       const allDefs = [];
       let charCount = 0;
       for (const m of entry.meanings) {
         for (const d of m.definitions.slice(0, 2)) {
-          if (allDefs.length >= 6) break;
-          const defText = d.definition;
-          if (charCount + defText.length > 450) break;
-          allDefs.push({ pos: m.partOfSpeech, en: defText, example: d.example || '' });
-          charCount += defText.length + 5;
+          if (allDefs.length >= 6 || charCount > 450) break;
+          allDefs.push({ pos: m.partOfSpeech, en: d.definition, example: d.example || '' });
+          charCount += d.definition.length + 5;
         }
       }
+      if (allDefs.length === 0) return { phonetic, defsHtml: '', firstKr: '' };
 
-      if (allDefs.length === 0) {
-        resultEl.innerHTML = '<div style="color:var(--secondary);">정의를 찾을 수 없습니다.</div>';
-        return;
-      }
-
-      // 정의들을 | 구분자로 합쳐서 한 번에 번역
+      // 한국어 번역
       const batchText = allDefs.map(d => d.en).join(' | ');
-      fetch('https://api.mymemory.translated.net/get?q=' + encodeURIComponent(batchText) + '&langpair=en|ko')
+      return fetch('https://api.mymemory.translated.net/get?q=' + encodeURIComponent(batchText) + '&langpair=en|ko')
         .then(r => r.json())
         .then(transData => {
           const translated = (transData.responseData && transData.responseData.translatedText) || '';
           const krParts = translated.split(/\s*\|\s*/);
-          renderDictResult(resultEl, meaningInput, phonetic, allDefs, krParts);
+          return _buildDefsHtml(phonetic, allDefs, krParts);
         })
-        .catch(() => {
-          // 번역 실패 → 영어 정의만 표시
-          renderDictResult(resultEl, meaningInput, phonetic, allDefs, []);
-        });
+        .catch(() => _buildDefsHtml(phonetic, allDefs, []));
     })
     .catch(() => {
-      // 영영사전 실패 → 단어 번역만 시도
-      fetch('https://api.mymemory.translated.net/get?q=' + encodeURIComponent(word) + '&langpair=en|ko')
+      // 영영사전 완전 실패 → MyMemory 단어 번역만
+      return fetch('https://api.mymemory.translated.net/get?q=' + encodeURIComponent(baseWord) + '&langpair=en|ko')
         .then(r => r.json())
         .then(data => {
           const kr = data.responseData && data.responseData.translatedText;
-          if (kr && kr.toLowerCase() !== word.toLowerCase()) {
-            resultEl.innerHTML = '<div style="font-size:1.05em;font-weight:700;padding:8px 0;color:var(--text);">' + escapeHtml(kr) + '</div>';
-            if (meaningInput && !meaningInput.value) meaningInput.value = kr;
-          } else {
-            resultEl.innerHTML = '<div style="color:var(--secondary);padding:8px 0;">뜻을 찾을 수 없습니다.<br>아래 Daum 사전 버튼을 이용하거나 직접 입력하세요.</div>';
+          if (kr && kr.toLowerCase() !== baseWord.toLowerCase()) {
+            return { phonetic: '', firstKr: kr,
+              defsHtml: '<div style="font-size:1.05em;font-weight:700;padding:8px 0;color:var(--text);">' + escapeHtml(kr) + '</div>' };
           }
+          return { phonetic: '', defsHtml: '', firstKr: '' };
         })
-        .catch(() => {
-          resultEl.innerHTML = '<div style="color:var(--secondary);padding:8px 0;">뜻을 찾을 수 없습니다.<br>아래 Daum 사전 버튼을 이용하거나 직접 입력하세요.</div>';
-        });
+        .catch(() => ({ phonetic: '', defsHtml: '', firstKr: '' }));
     });
 }
 
-function isKorean(text) {
-  // 한국어 문자가 30% 이상이면 한국어로 판단
+function _isKorean(text) {
   const kr = (text.match(/[\uAC00-\uD7AF\u3130-\u318F]/g) || []).length;
   return kr / Math.max(1, text.length) > 0.15;
 }
 
-function renderDictResult(resultEl, meaningInput, phonetic, allDefs, krParts) {
+function _buildDefsHtml(phonetic, allDefs, krParts) {
   let html = '';
   let firstKr = '';
-
-  // 발음
-  if (phonetic) {
-    html += '<div style="color:var(--secondary);margin-bottom:10px;font-size:0.95em;">' + escapeHtml(phonetic) + '</div>';
-  }
-
-  // 정의 표시
   let currentPos = '';
   let defNum = 0;
+
   allDefs.forEach((d, i) => {
     if (d.pos !== currentPos) {
       currentPos = d.pos;
@@ -1620,36 +1696,22 @@ function renderDictResult(resultEl, meaningInput, phonetic, allDefs, krParts) {
       html += '<div style="font-weight:700;color:var(--accent);font-size:0.9em;margin:10px 0 5px;border-bottom:1px solid var(--border);padding-bottom:3px;">' + escapeHtml(posLabel) + '</div>';
     }
     defNum++;
-
     const krText = (krParts[i] || '').trim();
-    const hasKr = krText && isKorean(krText);
+    const hasKr = krText && _isKorean(krText);
 
     if (hasKr) {
-      // 한국어 번역 성공
-      html += '<div style="margin-bottom:6px;">';
-      html += '<div style="font-weight:600;color:var(--text);">' + defNum + '. ' + escapeHtml(krText) + '</div>';
-      html += '<div style="font-size:0.82em;color:var(--secondary);margin-top:1px;">' + escapeHtml(d.en) + '</div>';
-      html += '</div>';
+      html += '<div style="margin-bottom:6px;"><div style="font-weight:600;color:var(--text);">' + defNum + '. ' + escapeHtml(krText) + '</div>';
+      html += '<div style="font-size:0.82em;color:var(--secondary);margin-top:1px;">' + escapeHtml(d.en) + '</div></div>';
       if (!firstKr) firstKr = krText;
     } else {
-      // 한국어 번역 실패 → 영어 정의 표시
-      html += '<div style="margin-bottom:6px;">';
-      html += '<div style="color:var(--text);">' + defNum + '. ' + escapeHtml(d.en) + '</div>';
-      html += '</div>';
+      html += '<div style="margin-bottom:6px;"><div style="color:var(--text);">' + defNum + '. ' + escapeHtml(d.en) + '</div></div>';
     }
-
-    // 예문
     if (d.example) {
       html += '<div style="font-size:0.82em;color:var(--secondary);font-style:italic;margin:-2px 0 6px 14px;">"' + escapeHtml(d.example) + '"</div>';
     }
   });
 
-  // 단어장 입력란 자동 채우기
-  if (meaningInput && !meaningInput.value && firstKr) {
-    meaningInput.value = firstKr;
-  }
-
-  resultEl.innerHTML = html || '<div style="color:var(--secondary);">뜻을 찾을 수 없습니다.</div>';
+  return { phonetic, defsHtml: html, firstKr };
 }
 
 function closeDictionary() {
