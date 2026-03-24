@@ -568,14 +568,12 @@ body {
 .dict-panel {
   position: fixed;
   bottom: 0; left: 0; right: 0;
-  height: 50vh;
   background: var(--card-bg);
   border-top: 2px solid var(--accent);
   border-radius: 16px 16px 0 0;
   box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
   z-index: 200;
-  display: flex;
-  flex-direction: column;
+  padding-bottom: env(safe-area-inset-bottom, 12px);
   transition: transform 0.3s ease;
 }
 .dict-header {
@@ -784,16 +782,18 @@ body {
   </div>
 
   <!-- Dictionary Panel (fixed bottom sheet) -->
-  <div id="dict-panel" style="display:none;">
-    <div class="dict-panel">
-      <div class="dict-header">
-        <span class="dict-word" id="dict-word"></span>
-        <button class="dict-close" onclick="closeDictionary()">닫기</button>
-      </div>
-      <div class="dict-actions">
-        <button class="dict-save-btn" id="dict-save-btn" onclick="saveWordFromDict()">단어장에 추가</button>
-        <button class="dict-open-btn" onclick="openDictExternal()">사전에서 보기</button>
-      </div>
+  <div id="dict-panel" class="dict-panel" style="display:none;">
+    <div class="dict-header">
+      <span class="dict-word" id="dict-word"></span>
+      <button class="dict-close" onclick="closeDictionary()">닫기</button>
+    </div>
+    <div style="padding:12px 16px;">
+      <input type="text" id="dict-meaning-input" placeholder="뜻을 입력하세요"
+        style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-size:0.95em;background:var(--bg);color:var(--text);font-family:var(--font-ui);">
+    </div>
+    <div class="dict-actions">
+      <button class="dict-save-btn" id="dict-save-btn" onclick="saveWordFromDict()">단어장에 추가</button>
+      <button class="dict-open-btn" onclick="openDictExternal()">Daum 사전</button>
     </div>
   </div>
 </div>
@@ -937,8 +937,7 @@ function showPassageList(examIdx) {
     li.onclick = () => showPassage(examIdx, i);
 
     const qCount = p.questions.length;
-    const isListening = currentSubject === 'english' && p.range === '1~17';
-    const preview = isListening ? '듣기 평가' : p.sections.map(s => s.text.substring(0, 40)).join(' / ');
+    const preview = p.sections.map(s => s.text.substring(0, 40)).join(' / ');
 
     const examProg = progress[exam.id];
     const passageProg = examProg && examProg.passages && examProg.passages[String(i)];
@@ -967,13 +966,6 @@ function showPassage(examIdx, passageIdx) {
   currentPassageIdx = passageIdx;
   const exam = getExamData().exams[examIdx];
   const passage = exam.passages[passageIdx];
-
-  // 듣기 영역: 지문 없이 바로 문제로
-  const isListening = currentSubject === 'english' && passage.range === '1~17';
-  if (isListening) {
-    showQuestions();
-    return;
-  }
 
   document.getElementById('reading-title').textContent = '[' + passage.range + ']';
 
@@ -1385,17 +1377,21 @@ function showDictionary(word) {
 
   // 이미 단어장에 있는지 확인
   const vocab = getVocabulary();
-  const exists = vocab.words.some(w => w.word.toLowerCase() === _currentDictWord);
+  const existing = vocab.words.find(w => w.word.toLowerCase() === _currentDictWord);
   const saveBtn = document.getElementById('dict-save-btn');
-  if (exists) {
+  const meaningInput = document.getElementById('dict-meaning-input');
+  if (existing) {
     saveBtn.textContent = '추가됨';
     saveBtn.className = 'dict-save-btn saved';
+    meaningInput.value = existing.meaning || '';
   } else {
     saveBtn.textContent = '단어장에 추가';
     saveBtn.className = 'dict-save-btn';
+    meaningInput.value = '';
   }
 
   document.getElementById('dict-panel').style.display = 'block';
+  meaningInput.focus();
 }
 
 function closeDictionary() {
@@ -1408,12 +1404,19 @@ function openDictExternal() {
 
 function saveWordFromDict() {
   if (!_currentDictWord) return;
-  const saved = saveWordToVocabulary(_currentDictWord);
+  const meaning = document.getElementById('dict-meaning-input').value.trim();
+  const saved = saveWordToVocabulary(_currentDictWord, meaning);
   const btn = document.getElementById('dict-save-btn');
   if (saved) {
     btn.textContent = '추가됨';
     btn.className = 'dict-save-btn saved';
   } else {
+    // 이미 있으면 뜻 업데이트
+    if (meaning) {
+      const vocab = getVocabulary();
+      const entry = vocab.words.find(w => w.word === _currentDictWord);
+      if (entry) { entry.meaning = meaning; localStorage.setItem('vocabulary', JSON.stringify(vocab)); }
+    }
     btn.textContent = '이미 추가됨';
     btn.className = 'dict-save-btn saved';
   }
@@ -1427,7 +1430,7 @@ function getVocabulary() {
   catch { return { words: [] }; }
 }
 
-function saveWordToVocabulary(word) {
+function saveWordToVocabulary(word, meaning) {
   const vocab = getVocabulary();
   if (vocab.words.some(w => w.word.toLowerCase() === word.toLowerCase())) return false;
 
@@ -1437,7 +1440,7 @@ function saveWordToVocabulary(word) {
 
   vocab.words.push({
     word: word.toLowerCase(),
-    meaning: '',
+    meaning: meaning || '',
     dateAdded: new Date().toISOString().slice(0, 10),
     sourceExam: exam ? exam.id : '',
     sourceRange: passage ? passage.range : '',
