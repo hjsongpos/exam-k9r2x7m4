@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<title>국어 기출 학습</title>
+<title>기출 학습</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
@@ -536,6 +536,126 @@ body {
   transition: all 0.15s;
 }
 .reset-btn:active { background: rgba(220,38,38,0.1); color: var(--wrong); border-color: var(--wrong); }
+
+/* ── Subject tabs ── */
+.subject-tabs {
+  display: flex; gap: 0; margin-bottom: 16px;
+  background: var(--card-bg); border-radius: 10px;
+  box-shadow: var(--shadow-sm); overflow: hidden;
+}
+.subject-tab {
+  flex: 1; padding: 10px 0; text-align: center;
+  border: none; background: transparent;
+  color: var(--secondary); font-size: 0.9em; font-weight: 600;
+  cursor: pointer; font-family: var(--font-ui);
+  transition: all 0.15s;
+}
+.subject-tab.active {
+  background: var(--accent); color: #fff;
+}
+
+/* ── English passage typography ── */
+.passage-text.english {
+  word-break: normal;
+  font-family: Georgia, "Times New Roman", var(--font-reading);
+  line-height: 1.9;
+}
+.passage-text.english .paragraph {
+  text-indent: 0;
+}
+
+/* ── Dictionary panel ── */
+.dict-panel {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 50vh;
+  background: var(--card-bg);
+  border-top: 2px solid var(--accent);
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+.dict-header {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.dict-word { font-weight: 700; font-size: 1.1em; color: var(--accent); }
+.dict-close {
+  background: none; border: 1px solid var(--border);
+  border-radius: 6px; padding: 4px 12px;
+  color: var(--text); cursor: pointer; font-size: 0.9em;
+}
+.dict-actions {
+  display: flex; gap: 8px; padding: 8px 16px; flex-shrink: 0;
+}
+.dict-save-btn, .dict-open-btn {
+  flex: 1; padding: 8px;
+  border: 1px solid var(--accent); border-radius: 8px;
+  font-weight: 600; cursor: pointer; font-size: 0.85em;
+  font-family: var(--font-ui);
+}
+.dict-save-btn {
+  background: var(--accent-light); color: var(--accent);
+}
+.dict-open-btn {
+  background: var(--accent); color: #fff;
+}
+.dict-save-btn.saved {
+  background: var(--correct); color: #fff;
+  border-color: var(--correct);
+}
+
+/* ── Vocabulary view ── */
+.vocab-btn {
+  width: 100%; padding: 12px;
+  background: var(--card-bg); color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-size: 0.95em; font-weight: 600;
+  cursor: pointer; margin-bottom: 12px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.1s;
+}
+.vocab-btn:active { transform: scale(0.98); }
+.vocab-controls { margin-bottom: 16px; }
+.vocab-summary { font-size: 0.9em; color: var(--secondary); margin-bottom: 10px; }
+.vocab-sort { display: flex; gap: 0; background: var(--card-bg); border-radius: 8px; box-shadow: var(--shadow-sm); overflow: hidden; }
+.vocab-sort-btn {
+  flex: 1; padding: 8px 0; text-align: center;
+  border: none; background: transparent;
+  color: var(--secondary); font-size: 0.8em; font-weight: 600;
+  cursor: pointer; transition: all 0.15s;
+}
+.vocab-sort-btn.active { background: var(--accent); color: #fff; }
+.vocab-list { list-style: none; }
+.vocab-item {
+  padding: 12px 16px; border-radius: 12px;
+  margin-bottom: 8px; background: var(--card-bg);
+  box-shadow: var(--shadow-sm); cursor: pointer;
+  transition: transform 0.15s;
+}
+.vocab-item:active { transform: scale(0.98); }
+.vocab-item.mastered { opacity: 0.6; }
+.vocab-word { font-weight: 700; font-size: 1.05em; margin-bottom: 2px; }
+.vocab-meaning { color: var(--secondary); font-size: 0.9em; margin-bottom: 4px; }
+.vocab-meta { font-size: 0.75em; color: var(--secondary); }
+.vocab-empty { text-align: center; padding: 40px 0; color: var(--secondary); }
+
+/* ── Word Quiz ── */
+.quiz-prompt {
+  font-size: 2em; font-weight: 800;
+  text-align: center; padding: 40px 20px;
+  color: var(--accent);
+}
+.quiz-progress-text {
+  font-size: 0.85em; color: var(--secondary); font-weight: 600;
+}
 </style>
 </head>
 <body>
@@ -544,15 +664,20 @@ body {
   <!-- Menu View -->
   <div id="menu-view" class="view active visible">
     <div class="header">
-      <h1>국어 기출 학습</h1>
+      <h1 id="app-title">국어 기출 학습</h1>
       <div class="font-controls">
         <button class="font-btn" onclick="changeFontSize(-1)">A-</button>
         <span class="font-size-label" id="font-label">16</span>
         <button class="font-btn" onclick="changeFontSize(1)">A+</button>
       </div>
     </div>
+    <div class="subject-tabs" id="subject-tabs">
+      <button class="subject-tab active" data-subject="korean" onclick="switchSubject('korean')">국어</button>
+      <button class="subject-tab" data-subject="english" onclick="switchSubject('english')">영어</button>
+    </div>
     <button class="random-btn" onclick="selectRandom()">랜덤 지문 선택</button>
     <button class="stats-btn" onclick="showStats()">학습 진도 관리</button>
+    <button class="vocab-btn" id="vocab-btn" onclick="showVocabulary()" style="display:none">단어장</button>
     <ul class="exam-list" id="exam-list"></ul>
   </div>
 
@@ -628,15 +753,96 @@ body {
       </div>
     </div>
   </div>
+
+  <!-- Vocabulary View -->
+  <div id="vocab-view" class="view">
+    <div class="header">
+      <button class="back-btn" onclick="showMenu()">← 목록</button>
+      <h1>단어장</h1>
+      <div style="width:80px"></div>
+    </div>
+    <div class="vocab-controls" id="vocab-controls">
+      <div class="vocab-summary" id="vocab-summary"></div>
+      <div class="vocab-sort">
+        <button class="vocab-sort-btn active" data-sort="date" onclick="setVocabSort('date')">최신순</button>
+        <button class="vocab-sort-btn" data-sort="alpha" onclick="setVocabSort('alpha')">알파벳순</button>
+        <button class="vocab-sort-btn" data-sort="exam" onclick="setVocabSort('exam')">시험별</button>
+      </div>
+    </div>
+    <ul class="vocab-list" id="vocab-list"></ul>
+    <button class="random-btn" onclick="startWordQuiz()" id="quiz-start-btn" style="display:none">단어 퀴즈 시작</button>
+  </div>
+
+  <!-- Word Quiz View -->
+  <div id="quiz-view" class="view">
+    <div class="header">
+      <button class="back-btn" onclick="showVocabulary()">← 단어장</button>
+      <h1>단어 퀴즈</h1>
+      <div class="quiz-progress-text" id="quiz-progress"></div>
+    </div>
+    <div id="quiz-container"></div>
+  </div>
+
+  <!-- Dictionary Panel (fixed bottom sheet) -->
+  <div id="dict-panel" style="display:none;">
+    <div class="dict-panel">
+      <div class="dict-header">
+        <span class="dict-word" id="dict-word"></span>
+        <button class="dict-close" onclick="closeDictionary()">닫기</button>
+      </div>
+      <div class="dict-actions">
+        <button class="dict-save-btn" id="dict-save-btn" onclick="saveWordFromDict()">단어장에 추가</button>
+        <button class="dict-open-btn" onclick="openDictExternal()">사전에서 보기</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script src="data.js"></script>
+<script src="data_english.js"></script>
+<script>
+// Guard: if data_english.js hasn't loaded, create empty placeholder
+if (typeof EXAM_DATA_ENG === 'undefined') {
+  var EXAM_DATA_ENG = { exams: [], figures: [] };
+}
+</script>
 <script>
 // ═══ State ═══
 let currentExamIdx = null;
 let currentPassageIdx = null;
 let userAnswers = {};
 let graded = false;
+let currentSubject = localStorage.getItem('subject') || 'korean';
+
+// ═══ Subject switching ═══
+function getExamData() {
+  return currentSubject === 'english' ? EXAM_DATA_ENG : EXAM_DATA;
+}
+
+function getProgressKey() {
+  return currentSubject === 'english' ? 'progress_eng' : 'progress';
+}
+
+function getDailyStatsKey() {
+  return currentSubject === 'english' ? 'dailyStats_eng' : 'dailyStats';
+}
+
+function getFiguresDir() {
+  return currentSubject === 'english' ? 'figures_eng/' : 'figures/';
+}
+
+function switchSubject(subject) {
+  currentSubject = subject;
+  localStorage.setItem('subject', subject);
+  document.querySelectorAll('.subject-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.subject === subject);
+  });
+  document.getElementById('app-title').textContent =
+    subject === 'english' ? '영어 기출 학습' : '국어 기출 학습';
+  document.getElementById('vocab-btn').style.display =
+    subject === 'english' ? 'block' : 'none';
+  renderExamList();
+}
 
 // ═══ Font size ═══
 let fontSize = parseInt(localStorage.getItem('fontSize') || '16');
@@ -655,7 +861,7 @@ function changeFontSize(delta) {
 
 // ═══ Progress tracking ═══
 function getProgress() {
-  try { return JSON.parse(localStorage.getItem('progress') || '{}'); }
+  try { return JSON.parse(localStorage.getItem(getProgressKey()) || '{}'); }
   catch { return {}; }
 }
 
@@ -672,15 +878,13 @@ function savePassageProgress(examId, passageIdx, correct, total) {
     lastDate: new Date().toISOString().slice(0, 10),
     bestScore: correct > bestPrev ? scoreStr : (prev.bestScore || scoreStr)
   };
-  localStorage.setItem('progress', JSON.stringify(prog));
-
-  // 일별 통계 저장
+  localStorage.setItem(getProgressKey(), JSON.stringify(prog));
   saveDailyStats(1, total, correct);
 }
 
 // ═══ Daily stats ═══
 function getDailyStats() {
-  try { return JSON.parse(localStorage.getItem('dailyStats') || '{}'); }
+  try { return JSON.parse(localStorage.getItem(getDailyStatsKey()) || '{}'); }
   catch { return {}; }
 }
 
@@ -691,7 +895,7 @@ function saveDailyStats(passages, questions, correct) {
   stats[today].passages += passages;
   stats[today].questions += questions;
   stats[today].correct += correct;
-  localStorage.setItem('dailyStats', JSON.stringify(stats));
+  localStorage.setItem(getDailyStatsKey(), JSON.stringify(stats));
 }
 
 function getExamProgress(examId, totalPassages) {
@@ -714,13 +918,14 @@ function showView(id) {
 }
 
 function showMenu() {
+  closeDictionary();
   renderExamList();
   showView('menu-view');
 }
 
 function showPassageList(examIdx) {
   currentExamIdx = examIdx;
-  const exam = EXAM_DATA.exams[examIdx];
+  const exam = getExamData().exams[examIdx];
   const progress = getProgress();
   document.getElementById('exam-title').textContent = exam.title;
 
@@ -732,7 +937,8 @@ function showPassageList(examIdx) {
     li.onclick = () => showPassage(examIdx, i);
 
     const qCount = p.questions.length;
-    const preview = p.sections.map(s => s.text.substring(0, 40)).join(' / ');
+    const isListening = currentSubject === 'english' && p.range === '1~17';
+    const preview = isListening ? '듣기 평가' : p.sections.map(s => s.text.substring(0, 40)).join(' / ');
 
     const examProg = progress[exam.id];
     const passageProg = examProg && examProg.passages && examProg.passages[String(i)];
@@ -759,13 +965,21 @@ function showPassageList(examIdx) {
 function showPassage(examIdx, passageIdx) {
   currentExamIdx = examIdx;
   currentPassageIdx = passageIdx;
-  const exam = EXAM_DATA.exams[examIdx];
+  const exam = getExamData().exams[examIdx];
   const passage = exam.passages[passageIdx];
+
+  // 듣기 영역: 지문 없이 바로 문제로
+  const isListening = currentSubject === 'english' && passage.range === '1~17';
+  if (isListening) {
+    showQuestions();
+    return;
+  }
 
   document.getElementById('reading-title').textContent = '[' + passage.range + ']';
 
   const content = document.getElementById('passage-content');
   content.innerHTML = '';
+  content.className = 'passage-text' + (currentSubject === 'english' ? ' english' : '');
 
   passage.sections.forEach(section => {
     if (section.marker) {
@@ -785,10 +999,16 @@ function showPassage(examIdx, passageIdx) {
     });
   });
 
+  // 영어 지문 단어 클릭 이벤트
+  if (currentSubject === 'english') {
+    setupWordSelection(content);
+  }
+
   showView('reading-view');
 }
 
 function goBackFromReading() {
+  closeDictionary();
   if (currentExamIdx !== null) {
     showPassageList(currentExamIdx);
   } else {
@@ -823,7 +1043,7 @@ function showQuestions() {
   graded = false;
   userAnswers = {};
 
-  const exam = EXAM_DATA.exams[currentExamIdx];
+  const exam = getExamData().exams[currentExamIdx];
   const passage = exam.passages[currentPassageIdx];
 
   document.getElementById('questions-title').textContent = '[' + passage.range + '] 문제';
@@ -831,6 +1051,7 @@ function showQuestions() {
   const container = document.getElementById('questions-container');
   container.innerHTML = '';
 
+  const figDir = getFiguresDir();
   passage.questions.forEach((q, qi) => {
     const qDiv = document.createElement('div');
     qDiv.className = 'question';
@@ -855,7 +1076,7 @@ function showQuestions() {
       bogiHtml += '<div class="bogi-text">' + renderMarkup(q.bogi) + '</div>';
       if (q.figures && q.figures.length > 0) {
         q.figures.forEach(fig => {
-          bogiHtml += '<img class="passage-figure" src="figures/' + fig + '" alt="보기 그림">';
+          bogiHtml += '<img class="passage-figure" src="' + figDir + fig + '" alt="보기 그림">';
         });
       }
       bogiBox.innerHTML = bogiHtml;
@@ -900,7 +1121,7 @@ function selectChoice(qi, ci) {
 
 function gradeAnswers() {
   graded = true;
-  const exam = EXAM_DATA.exams[currentExamIdx];
+  const exam = getExamData().exams[currentExamIdx];
   const passage = exam.passages[currentPassageIdx];
   let correct = 0;
   let total = passage.questions.length;
@@ -925,10 +1146,8 @@ function gradeAnswers() {
     }
   });
 
-  // Save progress
   savePassageProgress(exam.id, currentPassageIdx, correct, total);
 
-  // Show results
   document.getElementById('grade-btn').style.display = 'none';
   document.getElementById('result-container').style.display = 'block';
   document.getElementById('score-display').textContent = correct + ' / ' + total;
@@ -954,7 +1173,8 @@ function scrollToQuestion(qi) {
 function retryQuestions() { showQuestions(); }
 
 function selectRandom() {
-  const exams = EXAM_DATA.exams;
+  const exams = getExamData().exams;
+  if (exams.length === 0) return;
   const examIdx = Math.floor(Math.random() * exams.length);
   const exam = exams[examIdx];
   const passageIdx = Math.floor(Math.random() * exam.passages.length);
@@ -966,10 +1186,15 @@ function renderExamList() {
   const list = document.getElementById('exam-list');
   list.innerHTML = '';
   const progress = getProgress();
+  const examData = getExamData();
 
-  // Group by year
+  if (examData.exams.length === 0) {
+    list.innerHTML = '<div style="text-align:center;padding:40px 0;color:var(--secondary);">아직 데이터가 없습니다.<br>PDF 다운로드 후 파서를 실행하세요.</div>';
+    return;
+  }
+
   const yearMap = new Map();
-  EXAM_DATA.exams.forEach((exam, i) => {
+  examData.exams.forEach((exam, i) => {
     const year = exam.year;
     if (!yearMap.has(year)) yearMap.set(year, []);
     yearMap.get(year).push({ exam, idx: i });
@@ -1043,7 +1268,6 @@ function renderStats() {
   const stats = getDailyStats();
   const days = currentRange;
 
-  // 날짜 배열 생성
   const dates = [];
   const today = new Date();
   for (let i = days - 1; i >= 0; i--) {
@@ -1052,14 +1276,12 @@ function renderStats() {
     dates.push(d.toISOString().slice(0, 10));
   }
 
-  // 일별 데이터
   const dailyData = dates.map(date => {
     const s = stats[date] || { passages: 0, questions: 0, correct: 0 };
     const accuracy = s.questions > 0 ? Math.round(s.correct / s.questions * 100) : 0;
     return { date, passages: s.passages, questions: s.questions, correct: s.correct, accuracy };
   });
 
-  // 전체 요약
   const totPassages = dailyData.reduce((s, d) => s + d.passages, 0);
   const totQuestions = dailyData.reduce((s, d) => s + d.questions, 0);
   const totCorrect = dailyData.reduce((s, d) => s + d.correct, 0);
@@ -1070,7 +1292,6 @@ function renderStats() {
     '<div class="stat-card"><div class="stat-value">' + totQuestions + '</div><div class="stat-label">푼 문제</div></div>' +
     '<div class="stat-card"><div class="stat-value">' + totAccuracy + '%</div><div class="stat-label">정답률</div></div>';
 
-  // 차트
   const chartsEl = document.getElementById('stats-charts');
 
   if (totQuestions === 0) {
@@ -1088,25 +1309,13 @@ function getDateLabel(dateStr, i, totalDays, data) {
   const d = new Date(dateStr + 'T00:00:00');
   const dayNames = ['일', '월', '화', '수', '목', '금', '토'];
 
-  if (totalDays <= 7) {
-    // 1주: 매일 요일 표시
-    return dayNames[d.getDay()];
-  }
-  if (totalDays <= 14) {
-    // 2주: 매일 M/D, 단 월요일만 굵게
-    return (d.getMonth() + 1) + '/' + d.getDate();
-  }
+  if (totalDays <= 7) return dayNames[d.getDay()];
+  if (totalDays <= 14) return (d.getMonth() + 1) + '/' + d.getDate();
   if (totalDays <= 30) {
-    // 1개월: 월요일에만 날짜 표시
-    if (d.getDay() === 1 || i === 0 || i === data.length - 1) {
-      return (d.getMonth() + 1) + '/' + d.getDate();
-    }
+    if (d.getDay() === 1 || i === 0 || i === data.length - 1) return (d.getMonth() + 1) + '/' + d.getDate();
     return '';
   }
-  // 3개월: 매월 1일과 15일에 표시
-  if (d.getDate() === 1 || d.getDate() === 15 || i === 0 || i === data.length - 1) {
-    return (d.getMonth() + 1) + '/' + d.getDate();
-  }
+  if (d.getDate() === 1 || d.getDate() === 15 || i === 0 || i === data.length - 1) return (d.getMonth() + 1) + '/' + d.getDate();
   return '';
 }
 
@@ -1136,16 +1345,277 @@ function buildChart(title, data, key, barClass, totalDays) {
 }
 
 function resetProgress() {
-  if (confirm('모든 학습 데이터를 초기화하시겠습니까?')) {
-    localStorage.removeItem('progress');
-    localStorage.removeItem('dailyStats');
+  if (confirm('현재 과목의 학습 데이터를 초기화하시겠습니까?')) {
+    localStorage.removeItem(getProgressKey());
+    localStorage.removeItem(getDailyStatsKey());
     renderStats();
     alert('학습 데이터가 초기화되었습니다.');
   }
 }
 
+// ═══ Dictionary (English word lookup) ═══
+let _currentDictWord = '';
+
+function setupWordSelection(container) {
+  container.addEventListener('click', function(e) {
+    if (e.target.closest('.dict-panel')) return;
+    let range;
+    if (document.caretRangeFromPoint) {
+      range = document.caretRangeFromPoint(e.clientX, e.clientY);
+    }
+    if (!range || range.startContainer.nodeType !== 3) return;
+    const word = getWordAtPoint(range.startContainer, range.startOffset);
+    if (word && /^[a-zA-Z'-]{2,}$/.test(word)) {
+      showDictionary(word);
+    }
+  });
+}
+
+function getWordAtPoint(node, offset) {
+  const text = node.textContent;
+  let start = offset, end = offset;
+  while (start > 0 && /[a-zA-Z'-]/.test(text[start - 1])) start--;
+  while (end < text.length && /[a-zA-Z'-]/.test(text[end])) end++;
+  return text.substring(start, end);
+}
+
+function showDictionary(word) {
+  _currentDictWord = word.toLowerCase();
+  document.getElementById('dict-word').textContent = _currentDictWord;
+
+  // 이미 단어장에 있는지 확인
+  const vocab = getVocabulary();
+  const exists = vocab.words.some(w => w.word.toLowerCase() === _currentDictWord);
+  const saveBtn = document.getElementById('dict-save-btn');
+  if (exists) {
+    saveBtn.textContent = '추가됨';
+    saveBtn.className = 'dict-save-btn saved';
+  } else {
+    saveBtn.textContent = '단어장에 추가';
+    saveBtn.className = 'dict-save-btn';
+  }
+
+  document.getElementById('dict-panel').style.display = 'block';
+}
+
+function closeDictionary() {
+  document.getElementById('dict-panel').style.display = 'none';
+}
+
+function openDictExternal() {
+  window.open('https://dic.daum.net/search.do?q=' + encodeURIComponent(_currentDictWord) + '&dic=eng', '_blank');
+}
+
+function saveWordFromDict() {
+  if (!_currentDictWord) return;
+  const saved = saveWordToVocabulary(_currentDictWord);
+  const btn = document.getElementById('dict-save-btn');
+  if (saved) {
+    btn.textContent = '추가됨';
+    btn.className = 'dict-save-btn saved';
+  } else {
+    btn.textContent = '이미 추가됨';
+    btn.className = 'dict-save-btn saved';
+  }
+}
+
+// ═══ Vocabulary Management ═══
+let vocabSort = 'date';
+
+function getVocabulary() {
+  try { return JSON.parse(localStorage.getItem('vocabulary') || '{"words":[]}'); }
+  catch { return { words: [] }; }
+}
+
+function saveWordToVocabulary(word) {
+  const vocab = getVocabulary();
+  if (vocab.words.some(w => w.word.toLowerCase() === word.toLowerCase())) return false;
+
+  const examData = getExamData();
+  const exam = currentExamIdx !== null ? examData.exams[currentExamIdx] : null;
+  const passage = exam && currentPassageIdx !== null ? exam.passages[currentPassageIdx] : null;
+
+  vocab.words.push({
+    word: word.toLowerCase(),
+    meaning: '',
+    dateAdded: new Date().toISOString().slice(0, 10),
+    sourceExam: exam ? exam.id : '',
+    sourceRange: passage ? passage.range : '',
+    reviewCount: 0,
+    lastReviewed: null,
+    mastered: false
+  });
+  localStorage.setItem('vocabulary', JSON.stringify(vocab));
+  return true;
+}
+
+function showVocabulary() {
+  renderVocabularyList();
+  showView('vocab-view');
+}
+
+function setVocabSort(sort) {
+  vocabSort = sort;
+  document.querySelectorAll('.vocab-sort-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.sort === sort);
+  });
+  renderVocabularyList();
+}
+
+function renderVocabularyList() {
+  const vocab = getVocabulary();
+  const list = document.getElementById('vocab-list');
+  list.innerHTML = '';
+
+  const total = vocab.words.length;
+  const mastered = vocab.words.filter(w => w.mastered).length;
+  document.getElementById('vocab-summary').textContent =
+    '총 ' + total + '단어 · 암기 완료 ' + mastered + '개';
+
+  document.getElementById('quiz-start-btn').style.display = total >= 4 ? 'block' : 'none';
+
+  if (total === 0) {
+    list.innerHTML = '<div class="vocab-empty">영어 지문에서 단어를 탭하여 추가하세요.</div>';
+    return;
+  }
+
+  let sorted = [...vocab.words];
+  if (vocabSort === 'date') sorted.sort((a, b) => b.dateAdded.localeCompare(a.dateAdded));
+  else if (vocabSort === 'alpha') sorted.sort((a, b) => a.word.localeCompare(b.word));
+  else if (vocabSort === 'exam') sorted.sort((a, b) => a.sourceExam.localeCompare(b.sourceExam));
+
+  sorted.forEach(entry => {
+    const li = document.createElement('li');
+    li.className = 'vocab-item' + (entry.mastered ? ' mastered' : '');
+    li.innerHTML =
+      '<div class="vocab-word">' + escapeHtml(entry.word) + '</div>' +
+      '<div class="vocab-meaning">' + escapeHtml(entry.meaning || '탭하여 뜻 입력') + '</div>' +
+      '<div class="vocab-meta">' + entry.sourceExam + ' [' + entry.sourceRange + '] · ' + entry.dateAdded + '</div>';
+    li.onclick = () => editVocabEntry(entry.word);
+    list.appendChild(li);
+  });
+}
+
+function editVocabEntry(word) {
+  const vocab = getVocabulary();
+  const entry = vocab.words.find(w => w.word === word);
+  if (!entry) return;
+
+  const meaning = prompt('뜻 입력 (' + word + '):', entry.meaning || '');
+  if (meaning === null) return;
+  entry.meaning = meaning;
+  localStorage.setItem('vocabulary', JSON.stringify(vocab));
+  renderVocabularyList();
+}
+
+// ═══ Word Quiz ═══
+let quizState = { words: [], currentIdx: 0, correct: 0, total: 0 };
+
+function startWordQuiz() {
+  const vocab = getVocabulary();
+  const withMeaning = vocab.words.filter(w => w.meaning && w.meaning.trim());
+
+  if (withMeaning.length < 4) {
+    alert('뜻이 입력된 단어가 4개 이상 필요합니다.\n단어장에서 뜻을 입력해주세요.');
+    return;
+  }
+
+  quizState.words = shuffle([...withMeaning]).slice(0, 20);
+  quizState.currentIdx = 0;
+  quizState.correct = 0;
+  quizState.total = quizState.words.length;
+
+  showView('quiz-view');
+  renderQuizQuestion();
+}
+
+function renderQuizQuestion() {
+  if (quizState.currentIdx >= quizState.words.length) {
+    renderQuizResult();
+    return;
+  }
+
+  const container = document.getElementById('quiz-container');
+  const current = quizState.words[quizState.currentIdx];
+  const vocab = getVocabulary();
+
+  const others = vocab.words
+    .filter(w => w.word !== current.word && w.meaning && w.meaning.trim())
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 3);
+
+  const choices = shuffle([current, ...others]);
+
+  document.getElementById('quiz-progress').textContent =
+    (quizState.currentIdx + 1) + '/' + quizState.total;
+
+  container.innerHTML =
+    '<div class="quiz-prompt">' + escapeHtml(current.word) + '</div>' +
+    '<ul class="choices" id="quiz-choices">' +
+      choices.map((c, i) =>
+        '<li class="choice" data-word="' + escapeHtml(c.word) + '" onclick="answerQuiz(\'' + escapeHtml(c.word).replace(/'/g, "\\'") + '\')">' +
+          '<span class="choice-num">' + (i + 1) + '</span>' +
+          '<span class="choice-text">' + escapeHtml(c.meaning) + '</span>' +
+        '</li>'
+      ).join('') +
+    '</ul>';
+}
+
+function answerQuiz(selectedWord) {
+  const current = quizState.words[quizState.currentIdx];
+  const isCorrect = selectedWord === current.word;
+
+  if (isCorrect) quizState.correct++;
+
+  const choices = document.querySelectorAll('#quiz-choices .choice');
+  choices.forEach(c => {
+    c.style.pointerEvents = 'none';
+    if (c.dataset.word === current.word) c.classList.add('correct');
+    if (c.dataset.word === selectedWord && !isCorrect) c.classList.add('wrong');
+  });
+
+  const vocab = getVocabulary();
+  const entry = vocab.words.find(w => w.word === current.word);
+  if (entry) {
+    entry.reviewCount = (entry.reviewCount || 0) + 1;
+    entry.lastReviewed = new Date().toISOString().slice(0, 10);
+    localStorage.setItem('vocabulary', JSON.stringify(vocab));
+  }
+
+  setTimeout(() => {
+    quizState.currentIdx++;
+    renderQuizQuestion();
+  }, 1200);
+}
+
+function renderQuizResult() {
+  const container = document.getElementById('quiz-container');
+  const pct = Math.round(quizState.correct / quizState.total * 100);
+  container.innerHTML =
+    '<div class="result-box">' +
+      '<div class="score">' + quizState.correct + ' / ' + quizState.total + '</div>' +
+      '<div class="score-label">정답률 ' + pct + '%</div>' +
+    '</div>' +
+    '<div class="result-actions">' +
+      '<button onclick="startWordQuiz()">다시 풀기</button>' +
+      '<button class="primary" onclick="showVocabulary()">단어장으로</button>' +
+    '</div>';
+}
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
 // ═══ Init ═══
-renderExamList();
+(function init() {
+  // 과목 탭 초기화
+  switchSubject(currentSubject);
+  renderExamList();
+})();
 </script>
 </body>
 </html>
