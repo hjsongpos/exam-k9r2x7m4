@@ -49,13 +49,23 @@ body {
   font-family: var(--font-ui);
   background: var(--bg);
   color: var(--text);
-  font-size: var(--font-size);
+  font-size: 16px;
   line-height: 1.7;
   -webkit-text-size-adjust: 100%;
   padding-bottom: env(safe-area-inset-bottom, 20px);
 }
 
 .container { max-width: 600px; margin: 0 auto; padding: 16px; }
+
+/* ── Content font size (adjustable via A+/A- buttons) ── */
+.passage-text,
+.question-text,
+.choice-text,
+.bogi-text,
+.boxed-text {
+  font-size: var(--font-size);
+  line-height: 1.8;
+}
 
 /* ── Header (frosted glass) ── */
 .header {
@@ -654,19 +664,111 @@ body {
 .quiz-progress-text {
   font-size: 0.85em; color: var(--secondary); font-weight: 600;
 }
+
+/* ── Hamburger menu ── */
+.hamburger-btn {
+  background: none; border: none;
+  width: 36px; height: 36px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 5px; cursor: pointer; padding: 6px;
+  border-radius: 8px; flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.hamburger-btn span {
+  display: block; width: 20px; height: 2px;
+  background: var(--text); border-radius: 1px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+.hamburger-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger-btn.open span:nth-child(2) { opacity: 0; }
+.hamburger-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.nav-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 500;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.25s;
+}
+.nav-overlay.open { opacity: 1; pointer-events: auto; }
+
+.nav-menu {
+  position: fixed;
+  top: 0; right: 0;
+  width: 260px; max-width: 80vw;
+  height: 100%; overflow-y: auto;
+  background: var(--card-bg);
+  box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+  z-index: 501;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  padding: 60px 0 40px;
+}
+.nav-overlay.open .nav-menu { transform: translateX(0); }
+
+.nav-menu-close {
+  position: absolute; top: 12px; right: 12px;
+  background: none; border: none;
+  font-size: 1.5em; color: var(--secondary);
+  cursor: pointer; padding: 8px;
+}
+
+.nav-menu-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 24px;
+  color: var(--text); font-size: 1em; font-weight: 500;
+  cursor: pointer; border: none; background: none;
+  width: 100%; text-align: left;
+  transition: background 0.15s;
+  font-family: var(--font-ui);
+}
+.nav-menu-item:active { background: var(--accent-light); }
+.nav-menu-item .nav-icon { font-size: 1.2em; width: 28px; text-align: center; }
+.nav-menu-divider { height: 1px; background: var(--border); margin: 8px 24px; }
+
+/* ── Dict panel drag handle ── */
+.dict-drag-handle {
+  width: 100%; padding: 8px 0 4px;
+  cursor: ns-resize; display: flex;
+  align-items: center; justify-content: center;
+  -webkit-user-select: none; user-select: none;
+  touch-action: none;
+}
+.dict-drag-handle::after {
+  content: '';
+  width: 36px; height: 4px;
+  background: var(--border); border-radius: 2px;
+}
 </style>
 </head>
 <body>
+
+<!-- Navigation overlay -->
+<div id="nav-overlay" class="nav-overlay" onclick="closeNavMenu(event)">
+  <div class="nav-menu" id="nav-menu">
+    <button class="nav-menu-close" onclick="toggleNavMenu()">×</button>
+    <button class="nav-menu-item" onclick="navTo('top')"><span class="nav-icon">🏠</span>홈 (Top)</button>
+    <button class="nav-menu-item" onclick="navTo('korean')"><span class="nav-icon">📖</span>국어</button>
+    <button class="nav-menu-item" onclick="navTo('english')"><span class="nav-icon">🔤</span>영어</button>
+    <div class="nav-menu-divider"></div>
+    <button class="nav-menu-item" onclick="navTo('stats')"><span class="nav-icon">📊</span>진도 관리</button>
+    <button class="nav-menu-item" onclick="navTo('vocab')"><span class="nav-icon">📝</span>단어장</button>
+  </div>
+</div>
 
 <div class="container">
   <!-- Menu View -->
   <div id="menu-view" class="view active visible">
     <div class="header">
       <h1 id="app-title">국어 기출 학습</h1>
-      <div class="font-controls">
-        <button class="font-btn" onclick="changeFontSize(-1)">A-</button>
-        <span class="font-size-label" id="font-label">16</span>
-        <button class="font-btn" onclick="changeFontSize(1)">A+</button>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="font-controls">
+          <button class="font-btn" onclick="changeFontSize(-1)">A-</button>
+          <span class="font-size-label" id="font-label">16</span>
+          <button class="font-btn" onclick="changeFontSize(1)">A+</button>
+        </div>
+        <button class="hamburger-btn" onclick="toggleNavMenu()"><span></span><span></span><span></span></button>
       </div>
     </div>
     <div class="subject-tabs" id="subject-tabs">
@@ -684,7 +786,7 @@ body {
     <div class="header">
       <button class="back-btn" onclick="showMenu()">← 목록</button>
       <h1>학습 진도</h1>
-      <div style="width:80px"></div>
+      <button class="hamburger-btn" onclick="toggleNavMenu()"><span></span><span></span><span></span></button>
     </div>
     <div class="stats-summary" id="stats-summary"></div>
     <div class="range-tabs" id="range-tabs">
@@ -702,10 +804,13 @@ body {
     <div class="header">
       <button class="back-btn" onclick="showMenu()">← 목록</button>
       <h1 id="exam-title"></h1>
-      <div class="font-controls">
-        <button class="font-btn" onclick="changeFontSize(-1)">A-</button>
-        <span class="font-size-label" id="font-label2">16</span>
-        <button class="font-btn" onclick="changeFontSize(1)">A+</button>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="font-controls">
+          <button class="font-btn" onclick="changeFontSize(-1)">A-</button>
+          <span class="font-size-label" id="font-label2">16</span>
+          <button class="font-btn" onclick="changeFontSize(1)">A+</button>
+        </div>
+        <button class="hamburger-btn" onclick="toggleNavMenu()"><span></span><span></span><span></span></button>
       </div>
     </div>
     <ul class="exam-list" id="passage-list"></ul>
@@ -716,10 +821,13 @@ body {
     <div class="header">
       <button class="back-btn" onclick="goBackFromReading()">← 돌아가기</button>
       <h1 id="reading-title"></h1>
-      <div class="font-controls">
-        <button class="font-btn" onclick="changeFontSize(-1)">A-</button>
-        <span class="font-size-label" id="font-label3">16</span>
-        <button class="font-btn" onclick="changeFontSize(1)">A+</button>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="font-controls">
+          <button class="font-btn" onclick="changeFontSize(-1)">A-</button>
+          <span class="font-size-label" id="font-label3">16</span>
+          <button class="font-btn" onclick="changeFontSize(1)">A+</button>
+        </div>
+        <button class="hamburger-btn" onclick="toggleNavMenu()"><span></span><span></span><span></span></button>
       </div>
     </div>
     <div class="passage-text" id="passage-content"></div>
@@ -731,10 +839,13 @@ body {
     <div class="header">
       <button class="back-btn" onclick="showReading()">← 지문</button>
       <h1 id="questions-title"></h1>
-      <div class="font-controls">
-        <button class="font-btn" onclick="changeFontSize(-1)">A-</button>
-        <span class="font-size-label" id="font-label4">16</span>
-        <button class="font-btn" onclick="changeFontSize(1)">A+</button>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="font-controls">
+          <button class="font-btn" onclick="changeFontSize(-1)">A-</button>
+          <span class="font-size-label" id="font-label4">16</span>
+          <button class="font-btn" onclick="changeFontSize(1)">A+</button>
+        </div>
+        <button class="hamburger-btn" onclick="toggleNavMenu()"><span></span><span></span><span></span></button>
       </div>
     </div>
     <div id="questions-container"></div>
@@ -757,7 +868,7 @@ body {
     <div class="header">
       <button class="back-btn" onclick="showMenu()">← 목록</button>
       <h1>단어장</h1>
-      <div style="width:80px"></div>
+      <button class="hamburger-btn" onclick="toggleNavMenu()"><span></span><span></span><span></span></button>
     </div>
     <div class="vocab-controls" id="vocab-controls">
       <div class="vocab-summary" id="vocab-summary"></div>
@@ -776,13 +887,17 @@ body {
     <div class="header">
       <button class="back-btn" onclick="showVocabulary()">← 단어장</button>
       <h1>단어 퀴즈</h1>
-      <div class="quiz-progress-text" id="quiz-progress"></div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <div class="quiz-progress-text" id="quiz-progress"></div>
+        <button class="hamburger-btn" onclick="toggleNavMenu()"><span></span><span></span><span></span></button>
+      </div>
     </div>
     <div id="quiz-container"></div>
   </div>
 
   <!-- Dictionary Panel (fixed bottom sheet) -->
   <div id="dict-panel" class="dict-panel" style="display:none;">
+    <div class="dict-drag-handle" id="dict-drag-handle"></div>
     <div class="dict-header">
       <span class="dict-word" id="dict-word"></span>
       <button class="dict-close" onclick="closeDictionary()">닫기</button>
@@ -1397,44 +1512,85 @@ function showDictionary(word) {
   const resultEl = document.getElementById('dict-result');
   resultEl.innerHTML = '<div style="color:var(--secondary);padding:12px 0;text-align:center;">검색 중...</div>';
 
-  document.getElementById('dict-panel').style.display = 'block';
+  const panel = document.getElementById('dict-panel');
+  panel.style.display = 'block';
+  if (_dictPanelHeight) {
+    panel.style.height = _dictPanelHeight + 'px';
+  } else {
+    panel.style.height = '';
+  }
+  // 지문 스크롤 패딩 조정
+  setTimeout(adjustReadingPadding, 50);
 
-  // Free Dictionary API로 뜻 조회
+  // 영한사전 API로 뜻 조회
   fetchDictionary(_currentDictWord);
 }
 
 function fetchDictionary(word) {
   const resultEl = document.getElementById('dict-result');
-  fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + encodeURIComponent(word))
-    .then(r => { if (!r.ok) throw new Error('not found'); return r.json(); })
+  const meaningInput = document.getElementById('dict-meaning-input');
+
+  // 1) MyMemory 번역 API로 한국어 뜻 조회
+  const transPromise = fetch('https://api.mymemory.translated.net/get?q=' + encodeURIComponent(word) + '&langpair=en|ko')
+    .then(r => r.json())
     .then(data => {
-      let html = '';
-      const entry = data[0];
-      // 발음
-      if (entry.phonetic) {
-        html += '<div style="color:var(--secondary);margin-bottom:8px;">' + escapeHtml(entry.phonetic) + '</div>';
+      const translated = data.responseData && data.responseData.translatedText;
+      // 번역 결과가 원래 단어와 같으면 무효
+      if (translated && translated.toLowerCase() !== word.toLowerCase()) {
+        return translated;
       }
-      // 의미
-      entry.meanings.forEach(m => {
-        html += '<div style="margin-bottom:10px;">';
-        html += '<div style="font-weight:700;color:var(--accent);font-size:0.85em;margin-bottom:4px;">' + escapeHtml(m.partOfSpeech) + '</div>';
-        m.definitions.slice(0, 3).forEach((d, i) => {
-          html += '<div style="margin-bottom:4px;">' + (i + 1) + '. ' + escapeHtml(d.definition) + '</div>';
-          if (d.example) {
-            html += '<div style="color:var(--secondary);font-size:0.85em;font-style:italic;margin-bottom:4px;padding-left:12px;">"' + escapeHtml(d.example) + '"</div>';
-          }
+      return null;
+    })
+    .catch(() => null);
+
+  // 2) 영영사전에서 발음+품사 정보 조회
+  const engPromise = fetch('https://api.dictionaryapi.dev/api/v2/entries/en/' + encodeURIComponent(word))
+    .then(r => { if (!r.ok) throw new Error('not found'); return r.json(); })
+    .catch(() => null);
+
+  Promise.all([transPromise, engPromise]).then(([korMeaning, engData]) => {
+    let html = '';
+
+    // 발음 표시
+    if (engData && engData[0] && engData[0].phonetic) {
+      html += '<div style="color:var(--secondary);margin-bottom:8px;font-size:1em;">' + escapeHtml(engData[0].phonetic) + '</div>';
+    }
+
+    // 한국어 뜻 표시 (메인)
+    if (korMeaning) {
+      html += '<div style="font-size:1.1em;font-weight:700;margin-bottom:12px;padding:8px 12px;background:var(--accent-light);border-radius:8px;color:var(--text);">' + escapeHtml(korMeaning) + '</div>';
+      // 자동으로 뜻 입력란에도 채우기
+      if (meaningInput && !meaningInput.value) {
+        meaningInput.value = korMeaning;
+      }
+    }
+
+    // 영어 정의 (참고용)
+    if (engData && engData[0]) {
+      html += '<div style="font-size:0.8em;color:var(--secondary);margin-bottom:6px;font-weight:600;">참고 (영영)</div>';
+      engData[0].meanings.forEach(m => {
+        html += '<div style="margin-bottom:8px;">';
+        html += '<div style="font-weight:600;color:var(--accent);font-size:0.82em;margin-bottom:2px;">' + escapeHtml(m.partOfSpeech) + '</div>';
+        m.definitions.slice(0, 2).forEach((d, i) => {
+          html += '<div style="margin-bottom:3px;font-size:0.88em;color:var(--text);">' + (i + 1) + '. ' + escapeHtml(d.definition) + '</div>';
         });
         html += '</div>';
       });
-      resultEl.innerHTML = html || '<div style="color:var(--secondary);">뜻을 찾을 수 없습니다.</div>';
-    })
-    .catch(() => {
-      resultEl.innerHTML = '<div style="color:var(--secondary);padding:8px 0;">영영사전에서 찾을 수 없습니다.<br>아래 Daum 사전 버튼을 이용하세요.</div>';
-    });
+    }
+
+    if (!html) {
+      html = '<div style="color:var(--secondary);padding:8px 0;">뜻을 찾을 수 없습니다.<br>아래 Daum 사전 버튼을 이용하거나 직접 입력하세요.</div>';
+    }
+
+    resultEl.innerHTML = html;
+  });
 }
 
 function closeDictionary() {
   document.getElementById('dict-panel').style.display = 'none';
+  // 지문 패딩 복원
+  const readingView = document.getElementById('reading-view');
+  if (readingView) readingView.style.paddingBottom = '';
 }
 
 function openDictExternal() {
@@ -1650,6 +1806,98 @@ function shuffle(arr) {
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
   return arr;
+}
+
+// ═══ Hamburger Navigation Menu ═══
+function toggleNavMenu() {
+  const overlay = document.getElementById('nav-overlay');
+  overlay.classList.toggle('open');
+}
+
+function closeNavMenu(e) {
+  if (e.target === document.getElementById('nav-overlay')) {
+    toggleNavMenu();
+  }
+}
+
+function navTo(target) {
+  toggleNavMenu();
+  switch (target) {
+    case 'top':
+      showMenu();
+      break;
+    case 'korean':
+      switchSubject('korean');
+      showMenu();
+      break;
+    case 'english':
+      switchSubject('english');
+      showMenu();
+      break;
+    case 'stats':
+      showStats();
+      break;
+    case 'vocab':
+      switchSubject('english');
+      showVocabulary();
+      break;
+  }
+}
+
+// ═══ Dict panel resize ═══
+let _dictPanelHeight = null;
+
+(function initDictResize() {
+  const handle = document.getElementById('dict-drag-handle');
+  const panel = document.getElementById('dict-panel');
+  if (!handle || !panel) return;
+
+  let startY = 0, startH = 0, isDragging = false;
+
+  function onStart(e) {
+    isDragging = true;
+    startY = e.touches ? e.touches[0].clientY : e.clientY;
+    startH = panel.offsetHeight;
+    document.body.style.overflow = 'hidden';
+    e.preventDefault();
+  }
+
+  function onMove(e) {
+    if (!isDragging) return;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    const delta = startY - clientY;
+    const newH = Math.max(120, Math.min(window.innerHeight * 0.85, startH + delta));
+    panel.style.height = newH + 'px';
+    _dictPanelHeight = newH;
+    adjustReadingPadding();
+    e.preventDefault();
+  }
+
+  function onEnd() {
+    if (!isDragging) return;
+    isDragging = false;
+    document.body.style.overflow = '';
+  }
+
+  handle.addEventListener('touchstart', onStart, { passive: false });
+  handle.addEventListener('mousedown', onStart);
+  document.addEventListener('touchmove', onMove, { passive: false });
+  document.addEventListener('mousemove', onMove);
+  document.addEventListener('touchend', onEnd);
+  document.addEventListener('mouseup', onEnd);
+})();
+
+// ═══ Reading view padding adjustment for dict panel ═══
+function adjustReadingPadding() {
+  const panel = document.getElementById('dict-panel');
+  const readingView = document.getElementById('reading-view');
+  if (!readingView) return;
+  if (panel && panel.style.display !== 'none') {
+    const h = panel.offsetHeight;
+    readingView.style.paddingBottom = h + 'px';
+  } else {
+    readingView.style.paddingBottom = '';
+  }
 }
 
 // ═══ Init ═══
